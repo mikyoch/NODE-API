@@ -35,7 +35,7 @@ describe("Video Service Unit Tests", function () {
             size: 210,
             count: 2100,
             id: videoId
-        };
+        }; 
         
         chai.request('http://localhost/')
           .patch(`videos/${videoId}`)
