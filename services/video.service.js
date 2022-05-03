@@ -25,22 +25,22 @@ const totalSize = async ( name ) => {
   }
 }
 
-const getVideoMetadata = async ( id ) => {
+const getVideoMetadata = async ( videoId ) => {
   try {
     var sql = 'select size, count, created.user as createdBy from metadata JOIN created on created.video_id = metadata.video_id where metadata.video_id = ?'
-    data = await runQuery(sql, [id]);
+    data = await runQuery(sql, [videoId]);
     return data;
   } catch (err) {
     return console.error(err.message);
   }
 }
 
-const updateVideoMetadata = async( params ) => {
+const updateVideoMetadata = async( id, payload ) => {
   try {
     var sql = 'update metadata set size = ?, count = ? where video_id = ?';
-    data = await runQuery(sql, [params.size, params.count, params.id]);
-    console.log('updated', data);
-    return data;
+    var size = parseInt(payload.size);
+    var count = parseInt(payload.count);
+    data = await runQuery(sql, [size, count, id]);
   } catch (err) {
     return console.error(err.message);
   }

@@ -41,10 +41,11 @@ app.get("/video/:id", async (req, res, next) => {
     }
 });
 
-app.patch("/:id/:size/:cnt", async (req, res, next) => {
+app.patch("/videos/:id", async (req, res, next) => {
     try {
-        const params = req.params;
-        const result = await updateVideoMetadata( params );
+        const id = req.params.id;
+        const payload = req.body;
+        const result = await updateVideoMetadata( id, payload );
         res.json({
             message: "success",
             data: result
